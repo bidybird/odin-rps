@@ -5,6 +5,11 @@
 
 function startGame() {
 
+    playRound();
+
+    function playRound() {                                 //play five rounds
+        for (let i = 0; i < 5; i++) {
+    
 let playerSelection = prompt(
   "You are playing Rock Paper Scissors with the computer input your answer below"
 );
@@ -53,5 +58,7 @@ let finalResult = compareAnswers(playerSelection, computerAnswer);
 
 console.log(finalResult + "\nPlayer Selection: " + playerSelection + "\nComputer Selection: " + computerAnswer);
 
+        }
 }
 
+}
