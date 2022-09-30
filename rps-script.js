@@ -1,64 +1,45 @@
-// Part 1 Player picks rock paper or scissors
-// prompt appears
-// player writes in prompt
-// choice is converted into uppercase letters
+//start game and give prompt
+let winCount = 0;
+let loseCount = 0;
+let tieCount = 0;
 
-function startGame() {
-
-    playRound();
-
-    function playRound() {                                 //play five rounds
-        for (let i = 0; i < 5; i++) {
-    
-let playerSelection = prompt(
-  "You are playing Rock Paper Scissors with the computer input your answer below"
-);
-
-playerSelection = playerSelection.toUpperCase();
-
-// Part 2 Computer picks rock paper or scissors randomly
-function computerSelection() {
-  let rpsArray = ["ROCK", "PAPER", "SCISSORS"];
-
-  let compRpsAnswer = rpsArray[Math.floor(Math.random() * rpsArray.length)]; //Picks a word from the array
-
-  return compRpsAnswer;
-}
-
-const computerAnswer = computerSelection();
-
-//Need to be able to reference answer outside of function
-
-// Part 3 RPS answers are compared
-// Rock > Scissors, Scissors > Paper, Paper > Rock
-// Tie if the same
-// Player loses if they spell incorrectly or write a different word
-function compareAnswers(x, y) {
-    
-  if (x == y) {
-    return "You tied, ";
-  } else if (x == "ROCK" && y == "SCISSORS") {
-    return "You win, ";
-  } else if (x == "ROCK" && y == "PAPER") {
-    return "You lose, ";
-  } else if (x == "SCISSORS" && y == "PAPER") {
-    return "You win, ";
-  } else if (x == "SCISSORS" && y == "ROCK") {
-    return "You lose, ";
-  } else if (x == "PAPER" && y == "SCISSORS") {
-    return "You lose, ";
-  } else if (x == "PAPER" && y == "ROCK") {
-    return "You win, ";
+for (let i = 0; i < 5; i++) {
+  const round = gameStart();
+  console.log(round);
+  if (round == "win") {
+    winCount++;
+  } else if (round == "lose") {
+    loseCount++;
   } else {
-    return "You lose, spell your answer correctly. ";
+    tieCount++;
   }
 }
+console.log(`win count ${winCount}`);
+console.log(`lose count = ${loseCount}`);
+console.log(`tie count = ${tieCount}`);
 
-let finalResult = compareAnswers(playerSelection, computerAnswer);
+function gameStart() {
+  let userChoice = prompt(
+    "You are playing rock paper scissors, write an answer below."
+  );
 
-console.log(finalResult + "\nPlayer Selection: " + playerSelection + "\nComputer Selection: " + computerAnswer);
+  const computerOptions = ["rock", "paper", "scissors"];
+  let computerChoice =
+    computerOptions[Math.floor(Math.random() * computerOptions.length)];
 
-        }
-}
-
+  if (userChoice == computerChoice) {
+    return "tie";
+  } else if (userChoice == "rock" && computerChoice == "paper") {
+    return "lose";
+  } else if (userChoice == "rock" && computerChoice == "scissors") {
+    return "win";
+  } else if (userChoice == "paper" && computerChoice == "scissors") {
+    return "lose";
+  } else if (userChoice == "paper" && computerChoice == "rock") {
+    return "win";
+  } else if (userChoice == "scissors" && computerChoice == "rock") {
+    return "lose";
+  } else if (userChoice == "scissors" && computerChoice == "paper") {
+    return "win";
+  } else return "lose";
 }
