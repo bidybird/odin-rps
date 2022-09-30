@@ -1,45 +1,38 @@
-//start game and give prompt
-let winCount = 0;
-let loseCount = 0;
-let tieCount = 0;
+//start
 
-for (let i = 0; i < 5; i++) {
-  const round = gameStart();
-  console.log(round);
-  if (round == "win") {
-    winCount++;
-  } else if (round == "lose") {
-    loseCount++;
-  } else {
-    tieCount++;
-  }
+// get users pick and assign it to variable userChoice
+//may just leave as function
+
+let userChoice = getUserPick();
+
+function getUserPick() {
+  let userPick = prompt("You are playing RPS, write your choice");
+  return userPick;
 }
-console.log(`win count ${winCount}`);
-console.log(`lose count = ${loseCount}`);
-console.log(`tie count = ${tieCount}`);
 
-function gameStart() {
-  let userChoice = prompt(
-    "You are playing rock paper scissors, write an answer below."
-  );
+//get computers pick and assign it to variable computers choice
+//computers rps options are random
+// may remove variable computer choice and rename function computer choice
 
-  const computerOptions = ["rock", "paper", "scissors"];
-  let computerChoice =
-    computerOptions[Math.floor(Math.random() * computerOptions.length)];
+let computerChoice = computersPick();
 
+function computersPick() {
+  const rpsOptions = ["rock", "paper", "scissors"];
+  return rpsOptions[Math.floor(Math.random() * rpsOptions.length)];
+}
+//compare choices
+console.log(getResult());
+
+function getResult() {
   if (userChoice == computerChoice) {
     return "tie";
-  } else if (userChoice == "rock" && computerChoice == "paper") {
-    return "lose";
-  } else if (userChoice == "rock" && computerChoice == "scissors") {
+  } else if (
+    (userChoice == "rock" && computerChoice == "paper") ||
+    (userChoice == "scissors" && computerChoice == "rock") ||
+    (userChoice == "paper" && computerChoice == "scissors")
+  ) {
     return "win";
-  } else if (userChoice == "paper" && computerChoice == "scissors") {
+  } else {
     return "lose";
-  } else if (userChoice == "paper" && computerChoice == "rock") {
-    return "win";
-  } else if (userChoice == "scissors" && computerChoice == "rock") {
-    return "lose";
-  } else if (userChoice == "scissors" && computerChoice == "paper") {
-    return "win";
-  } else return "lose";
+  }
 }
