@@ -1,29 +1,45 @@
 //start
 
-// get users pick and assign it to variable userChoice
-//may just leave as function
+let winCount = 0;
+let loseCount = 0;
+let tieCount = 0;
 
-let userChoice = getUserPick();
+let gameRounds = prompt(
+  "Enter a number for the\namount of rounds rps you want to play.\nThe rounds will count down."
+);
+for (let i = 0; i < gameRounds; i++) {
+  console.log(`round ${i + 1}`);
+  let userChoice = getUserPick();
+  let computerChoice = getComputersChoice();
+  let result = getResult(userChoice, computerChoice);
+  console.log(result);
+
+  record(result);
+}
+
+console.log(`Round results`);
+console.log(`You won: ${winCount}`);
+console.log(`You lost: ${loseCount}`);
+console.log(`You tied:${tieCount}`);
+
+function record(result) {
+  if (result == "win") winCount++;
+  if (result == "lose") loseCount++;
+  if (result == "tie") tieCount++;
+}
 
 function getUserPick() {
-  let userPick = prompt("You are playing RPS, write your choice");
-  return userPick;
+  return prompt("You are playing rock, paper, scissors, write your answer.");
 }
 
-//get computers pick and assign it to variable computers choice
-//computers rps options are random
-// may remove variable computer choice and rename function computer choice
-
-let computerChoice = computersPick();
-
-function computersPick() {
-  const rpsOptions = ["rock", "paper", "scissors"];
-  return rpsOptions[Math.floor(Math.random() * rpsOptions.length)];
+function getComputersChoice() {
+  let compOptions = ["rock", "paper", "scissors"];
+  return compOptions[Math.floor(Math.random() * compOptions.length)];
 }
+
 //compare choices
-console.log(getResult());
-
-function getResult() {
+// console.log(getResult(userChoice, computerChoice));
+function getResult(userChoice, computerChoice) {
   if (userChoice == computerChoice) {
     return "tie";
   } else if (
